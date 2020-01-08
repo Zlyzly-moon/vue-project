@@ -3,8 +3,15 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <!-- viewport移动端适配                 网页宽度=视觉视口宽度                  用户禁止缩放-->
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+    <style>
+     *{
+       margin: 0;
+       padding: 0;
+     }
+    </style>
     <title>vue-project</title>
   </head>
   <body>
@@ -12,6 +19,25 @@
       <strong>We're sorry but vue-project doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
     </noscript>
     <div id="app"></div>
-    <!-- built files will be auto injected -->
+    <script type="text/javascript">
+    // rem适配
+       function reset() {
+          let clientWidth = document.documentElement.clientWidth
+          let rem = clientWidth/10
+          document.documentElement.style.fontSize = rem + 'px'
+          document.body.style.fontSize = '16px'
+       }
+
+       window.addEventListener('pageshow',()=>{
+        reset()
+       })
+       let timer
+       window.addEventListener('resize',()=>{
+        timer && clearInterval(timer)
+        timer = setInterval(() => {
+          reset()
+        }, 2000); 
+       })
+    </script>
   </body>
 </html>
